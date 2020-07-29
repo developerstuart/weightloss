@@ -1,0 +1,132 @@
+@mixin section {
+  position: relative;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 8vw;
+  padding-bottom: 8vw;
+  z-index: 10;
+  overflow: hidden;
+
+  @include mq-mobile {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+@mixin section_top($filename) {
+  background-image: url(../images/#{$filename}.svg);
+  background-repeat: no-repeat;
+  background-position: 50% calc(0% - 2px);
+  background-size: 100% auto;
+}
+@mixin section_bottom($filename) {
+  background-image: url(../images/#{$filename}.svg);
+  background-repeat: no-repeat;
+  background-position: 50% calc(100% + 2px);
+  background-size: 100% auto;
+}
+@mixin section_top_bottom($filename_top, $filename_bottom) {
+  background-image: url(../images/#{$filename_top}.svg), url(../images/#{$filename_bottom}.svg);
+  background-repeat: no-repeat;
+  background-position: 50% calc(0% - 2px), 50% calc(100% + 2px);
+  background-size: 100% auto;
+}
+@mixin section_type1 {
+  @include section_top_bottom("edge1-top", "edge1-bottom");
+  padding-top: 19vw;
+  padding-bottom: 19vw;
+}
+@mixin section_type2 {
+  @include section_top_bottom("edge2-top", "edge2-bottom");
+  padding-top: 19vw;
+  padding-bottom: 19vw;
+}
+
+.inner {
+  max-width: 1087px;
+  margin: auto;
+}
+
+.section-header {
+  @include section;
+  @include section_bottom("edge1-bottom");
+  background-color: $color_primary;
+  color: white;
+  min-height: 60vh;
+  padding-bottom: 20vw;
+  padding-top: 12vw;
+
+  @extend .layout-center;
+
+  .inner {
+    text-align: center;
+  }
+
+}
+
+.section-main1 {
+  @include section;
+}
+
+.section-overall {
+  @include section;
+}
+
+.section-toc {
+  @include section;
+}
+
+.section-business {
+  @include section;
+  @include section_type2;
+  background-color: $color_secondary_400;
+}
+
+.section-company {
+  @include section;
+}
+
+.section-apple {
+  @include section;
+  @include section_type1;
+  background-color: $color_grey_400;
+}
+
+.section-amazon {
+  @include section;
+}
+
+.section-google {
+  @include section;
+  @include section_type2;
+  background-color: $color_primary_400;
+
+}
+
+.section-facebook {
+  @include section;
+}
+
+.section-tesla {
+  @include section;
+  @include section_type1;
+  background-color: $color_tertiary_400;
+}
+
+.section-methodology {
+  @include section;
+}
+
+.footer {
+  @include section;
+  @include section_top("edge2-top");
+  padding-top: 19vw;
+  background-color: $color_grey_400;
+
+  text-align: center;
+
+  a {
+    margin: auto;
+    display: block;
+    width: 200px;
+  }
+}

@@ -1,0 +1,50 @@
+.layout-hor {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & > * {
+    width: calc(50% - 1.5rem);
+  }
+  & > * + * {
+    margin-left: 3rem;
+  }
+
+  .col-thin {
+    width: calc(40% - 1.5rem);
+  }
+  .col-wide {
+    width: calc(60% - 1.5rem);
+  }
+
+  @include mq-mobile {
+    flex-direction: column;
+
+    & > * {
+      width: 100%!important;
+    }
+    & > * + * {
+      margin-top: 1rem;
+      margin-left: 0;
+    }
+  }
+}
+
+.layout-center {
+  display: grid;
+  place-items: center;
+}
+
+.layout-rows {
+  margin-top: 5rem;
+  & > * + * {
+    margin-top: 5rem;
+  }
+
+  @include mq-mobile {
+    margin-top: 1rem;
+    & > * + * {
+      margin-top: 1rem;
+    }
+  }
+}

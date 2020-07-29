@@ -1,0 +1,59 @@
+/* Mixins */
+@mixin mq-desktop-sm {
+    @media only screen and (max-width: 1200px) {
+        @content;
+    }
+}
+@mixin mq-tablet {
+    @media only screen and (max-width: 1024px) {
+        @content;
+    }
+}
+@mixin mq-tablet-sm {
+    @media only screen and (max-width: 1023px) {
+        @content;
+    }
+}
+@mixin mq-mobile {
+    @media only screen and (max-width: 768px) {
+        @content;
+    }
+    @include ie11 {
+      @content;
+    }
+}
+@mixin mq-mobile-landscape {
+    @media only screen and (max-width: 768px) and (orientation: landscape) {
+        @content;
+    }
+    @include ie11 {
+      @content;
+    }
+}
+@mixin mq-mobile-sm {
+    @media only screen and (max-width: 374px) {
+        @content;
+    }
+}
+@mixin mq-mobile-vsm {
+    @media only screen and (max-width: 340px) {
+        @content;
+    }
+}
+@mixin ie11 {
+    @media all and (-ms-high-contrast:none)
+     {
+         & { @content; } /* IE10 */
+         *::-ms-backdrop, & { @content; }
+     }
+}
+@mixin edge {
+  @supports (-ms-ime-align:auto) {
+    & { @content; }
+  }
+}
+@mixin firefox {
+  @supports (-moz-appearance:none) {
+    & { @content; }
+  }
+}
