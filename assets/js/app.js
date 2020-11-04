@@ -49,6 +49,9 @@ function section_to_view() {
   let count = 0;
   let last_known = {'coords': [0, 0], 'weight': 136 };
   let last_known_count = 0;
+  let total_loss = 0;
+  let total_gain = 0;
+  let total_net = 0;
   let finding_end = false;
   for(let date in dataSet) {
     count++;
@@ -57,6 +60,18 @@ function section_to_view() {
       last_known = d;
       last_known_count = count;
     }
+
+    if(d['weight']) {
+      let loss = d['loss'].toFixed(1);
+      if(loss < 0)
+        total_loss += Math.abs(loss);
+      else
+        total_gain += Math.abs(loss);
+
+      total_net = total_gain - total_loss;
+    }
+
+
     if(count == position) {
 
       if(d['weight']) {
@@ -68,8 +83,15 @@ function section_to_view() {
         let translateX = Math.round(x*10)/10;
         let translateY = Math.round(y*10)/10;
         $graph.setAttribute("style", "transform: translateX(-" + translateX*100 + "%) translateY(-" + translateY * 100 + "%)");
-        $graphCircle.innerHTML = '<span>' + date + " - " + weight + 'kg</span>';
+        $graphCircle.innerHTML = '<span>' + weight + 'kg</span>';
         $graph_yaxis.setAttribute("style", "height: " + $graph.offsetHeight + "px; transform: translateY(-" + translateY * 100 + "%);");
+
+
+
+        document.querySelector('.js_loss').textContent = total_loss.toFixed(1);
+        document.querySelector('.js_gain').textContent = total_gain.toFixed(1);
+        document.querySelector('.js_net').textContent = total_net.toFixed(1);
+
         break;
       } else {
         finding_end = true;

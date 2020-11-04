@@ -1,22 +1,6 @@
-$color_night: #103766;
-
 $facebook_blue: #4C77D8;
 $twitter_blue: #059FF5;
 $linkedin_blue: #0077B5;
-
-$brands: (
-  "facebook1": #4C77D8,
-  "facebook2": white,
-  "amazon2": #131921,
-  "amazon1": #FF9900,
-  "google2": white,
-  "google1": #34A854,
-  "apple2": white,
-  "apple1": #444444,
-  "tesla1": #E82027,
-  "tesla2": white,
-);
-
 
 $color_grey_900: #363636;
 $color_grey_700: #6D7072;
@@ -24,29 +8,8 @@ $color_grey_500: #CCC;
 $color_grey_400: #F1F4F5;
 $color_grey_300: #fff;
 
-$color_primary_900: #28939C; // Default
-$color_primary_700: #3FB9BE;
-$color_primary_500: #84D2D5;
-$color_primary_400: #C0E2E3;
-$color_primary_300: #E1F2F2;
+$color_primary: #19647E;
+$color_secondary: #F5DD90;
+$color_tertiary: #EE6C4D;
 
-$color_secondary_900: #DA2453; // Default
-$color_secondary_700: #FF3663;
-$color_secondary_500: #FF6A8A;
-$color_secondary_400: #FFCDDC;
-$color_secondary_300: #FF38EF;
-
-$color_tertiary_900: #753BBD; // Default
-$color_tertiary_700: #A63BDF;
-$color_tertiary_500: #C267ED;
-$color_tertiary_400: #F3D4FF;
-$color_tertiary_300: #F7EAFC;
-
-$color_text: $color_grey_900;
-$color_primary: $color_primary_900;
-$color_secondary: $color_secondary_900;
-$color_tertiary: $color_tertiary_900;
-
-@function brand_get($name) {
-  @return map.get($brands, "#{$name}1");
-}
+$color_text: #fff;

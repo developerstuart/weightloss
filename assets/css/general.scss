@@ -9,10 +9,6 @@
 
 section {
   min-height: 300vh;
-
-  &:nth-child(2n) {
-    background-color: $color_grey_400;
-  }
 }
 
 .graph {
@@ -43,7 +39,7 @@ section {
 
     width: 2rem;
     height: 2rem;
-    background-color: #cc9900;
+    background-color: $color_secondary;
     border-radius: 50%;
     margin-left: -1rem;
     margin-top: -1rem;
@@ -54,8 +50,8 @@ section {
       bottom: 100%;
       background-color: white;
       padding: .4em;
-      border: 1px solid black;
       transform: translateX(-50%);
+      color: $color_primary;
     }
   }
 }
@@ -64,7 +60,7 @@ section {
   top: 50%;
   left: 0;
   height: 100%;
-  z-index: 1001;
+  z-index: 999;
   transition: 1s transform, 1s height;
 
   .marker {
@@ -72,6 +68,9 @@ section {
     left: 0;
     transform: translateY(-50%);
     padding: .3em;
+    background-color: white;
+    color: $color_primary;
+    font-size: .8rem;
 
     &:before {
       content: '';
@@ -79,9 +78,19 @@ section {
       left: 0;
       top: 50%;
       width: 100vw;
-      border-top: 1px solid #ccc;
+      border-top: 3px solid white;
+      z-index: -1;
     }
   }
+}
+
+.graph__net {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  background-color: white;
+  padding: 1rem;
+  z-index: 2000;
 }
 
 .visually-hidden {
@@ -96,7 +105,9 @@ section {
 
 body {
   @include font-body;
-  background-color: white;
+  background-color: $color_primary;
+   background-size: 5em 5em;
+  background-image: linear-gradient(0deg, $color_secondary .05em, transparent .05em), linear-gradient(90deg, $color_secondary .05em, transparent .05em);
   color: $color_text;
   font-size: 1em;
 
@@ -106,15 +117,15 @@ body {
 }
 
 a {
-  color: $color_primary;
+  color: $color_secondary;
   transition: color .2s;
 
   &:hover {
-    color: $color_secondary;
+    color: $color_tertiary;
   }
 }
 ::selection {
-  background-color: $color_primary_900;
+  background-color: $color_primary;
   color: $color_text;
 }
 
@@ -175,59 +186,7 @@ p, figure, table, blockquote {
   }
 }
 
-/* Brands */
 
-@mixin brand($name) {
-  .d-#{$name} {
-    /*background-color: map.get($brands, "#{$name}1");
-    color: map.get($brands, "#{$name}2");
-    padding: .2em .5em;
-    border-radius: .4em;
-    display: inline-block;
-    border: 1px solid  map.get($brands, "#{$name}2");
-
-    margin-left: .1em;
-    margin-right: .1em;
-
-    p & {
-      @include font-bold;
-      font-size: .8em;
-    }*/
-    $color: map.get($brands, "#{$name}1");
-    @if $color == white {
-      $color: $color_text;
-    }
-    $border: map.get($brands, "#{$name}2");
-    @if $border == white {
-      $border: $color_text;
-    }
-
-    @include font-bold;
-    //color: $color;
-    display: inline-block;
-    line-height: 1;
-    position: relative;
-
-    h1 &, h2 &, h3 &, h4 &, h5 &, h6 & {
-      @include font-heading;
-    }
-
-    /*&:after {
-      position: absolute;
-      top: 100%;
-      left: 0%;
-      width: 100%;
-      height: 2px;
-      background-color: $border;
-      content: '';
-    }*/
-  }
-}
-@include brand("apple");
-@include brand("amazon");
-@include brand("google");
-@include brand("facebook");
-@include brand("tesla");
 
 @mixin inview() {
   .inview &.wait,
@@ -242,367 +201,5 @@ p, figure, table, blockquote {
   .inview-90 &.wait90,
   .inview-100 &.wait100 {
     @content;
-  }
-}
-
-/* Stats */
-.stat-box {
-
-  padding: 3rem;
-  background-color: $color_primary_900;
-
-  * + & {
-    margin-top: 3rem;
-  }
-
-  @include mq-mobile {
-    padding: 20px;
-  }
-  //color: white;
-
-  &__inner {
-    position: relative;
-    border: .4rem solid white;
-    border-top: 0;
-    background-color: $color_primary_700;
-    padding: 2rem;
-  }
-
-  h2, h3, h4 {
-    position: relative;
-    text-align: center;
-    text-transform: uppercase;
-    margin-top: calc(-.63em - 2rem);
-    margin-left: -2.4rem;
-    margin-right: -2.4rem;
-    margin-bottom: 1rem;
-    color: white;
-
-    //display: inline-block;
-    overflow: hidden;
-
-    @include mq-mobile {
-      background-color: white;
-      color: $color_text;
-      display: block;
-      padding-top: .3rem;
-      padding-bottom: .3rem;
-
-    }
-
-    span {
-      position: relative;
-      display: inline-block;
-      padding-left: 1rem;
-      padding-right: 1rem;
-      &:before,
-      &:after {
-        position: absolute;
-        top: calc(.63em - .4rem);
-        height: .4rem;
-        width: 50vw;
-        background-color: white;
-        display: block;
-        content: '';
-      }
-      &:before {
-        right: 100%;
-      }
-      &:after {
-        left: 100%;
-      }
-    }
-  }
-}
-
-.keystats {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  //align-items: center;
-
-  li {
-    margin: 2rem;
-    width: 220px;
-    text-align: center;
-  }
-}
-
-.stat-circle {
-  position: relative;
-  width: 10rem;
-  height: 10rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  border: 2px solid $color_primary;
-  background-color: white;
-  color: $color_primary;
-  border-radius: 50%;
-  margin: auto;
-  padding: 1rem;
-  text-align: center;
-
-  & > strong {
-    display: block;
-    @include font-heading;
-    font-size: 1.8rem;
-    line-height: 1;
-
-  }
-  & > span {
-    display: block;
-    line-height: 1;
-  }
-  & > * + * {
-    margin-top: .2rem;
-  }
-
-  & + * {
-    margin-top: .5rem;
-  }
-  * + & {
-    margin-top: .5rem;
-  }
-}
-.stat-text {
-  display: block;
-}
-
-/* Elements */
-.toc {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  h2 {
-    background-color: white;
-    position: relative;
-    z-index: 10;
-    padding: .5em;
-    margin-left: 1rem;
-  }
-  ol {
-    position: relative;
-    z-index: 9;
-    margin-top: -2.5rem;
-    font-size: 1.3rem;
-    line-height: 1.5;
-    padding: 2rem 4rem;
-    min-width: 50%;
-    border: 2px solid $color_primary;
-    li {
-      padding-left: .6em;
-
-      & + li {
-        margin-top: .6em;
-      }
-    }
-  }
-}
-
-/* Graphs */
-.graph {
-
-}
-.graph__container {
-  height: 310px;
-}
-figure {
-  position: relative;
-  background-color: white;
-  padding: 2rem;
-  border-radius: 1rem;
-  border: 2px solid $color_grey_400;
-
-  figcaption {
-    @extend .h3;
-    margin-bottom: 1.5rem;
-    text-align: center;
-  }
-
-  border-left: 0;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  &:before {
-    position: absolute;
-    top: -2px;
-    right: 100%;
-    width: 100vw;
-    height: calc(100% + 4px);
-    border-top: 2px solid $color_grey_400;
-    border-bottom: 2px solid $color_grey_400;
-    content: '';
-    background-color: white;
-  }
-
-  opacity: 0;
-  transform: translateX(-50vw);
-
-  &.right {
-    border-radius: 1rem;
-    border: 2px solid $color_grey_400;
-    border-right: 0;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-
-    &:before {
-      right: auto;
-      left: 100%;
-    }
-
-    transform: translateX(50vw);
-  }
-
-  @include inview {
-    transition: 3s opacity, 3s transform;
-    opacity: 1;
-    transform: none;
-  }
-}
-figure.table {
-  background-color: transparent;
-  border: 0px none;
-  padding: 0;
-  text-align: left;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-
-  transform: none;
-
-  &:before {
-    display: none;
-  }
-
-  figcaption {
-    text-align: left;
-    text-decoration: underline;
-  }
-
-  table {
-    th, td {
-      padding: 1em 2em;
-
-      @include mq-mobile {
-        padding: .5em 1em;
-      }
-    }
-    th {
-    //  border-right: 1px solid $color_grey_700
-    }
-    * + tr {
-      td, th {
-        border-top: 1px solid $color_grey_700;
-      }
-    }
-
-    @for $i from 1 through 10 {
-      tr:nth-child(#{$i}) {
-        th, td {
-          transform: translateY(-40px * $i);
-          opacity: 0;
-        }
-      }
-    }
-
-
-  }
-
-  @include inview {
-    table {
-      th, td {
-        opacity: 1;
-        transform: none;
-        transition: 1s transform, .5s opacity;
-
-
-      }
-      @for $i from 1 through 10 {
-        tr:nth-child(#{$i}) {
-          th, td {
-            transition-delay: $i * .2s;
-          }
-        }
-      }
-    }
-
-  }
-
-  .inview & {
-
-  }
-}
-
-.company-lists {
-
-  .item {
-
-    & + .item {
-      margin-top: 2rem;
-    }
-
-    ul {
-      margin: 0;
-      list-style: none;
-      overflow: hidden;
-    }
-    li {
-      display: flex;
-    }
-    strong {
-      width: 150px;
-      display: block;
-    }
-    span {
-      position: relative;
-      width: 100%;
-      display: block;
-      min-height: 1.5rem;
-
-      &.bar:before {
-        content: '';
-        display: inline-block;
-        height: 10px;
-        background-color: black;
-        width: calc( var(--value) / var(--maxValue) * (100% - 50px));
-        margin-right: .5rem;
-
-      }
-    }
-
-    b {
-      position: absolute;
-      top: 0;
-      left: calc( var(--value) / var(--maxValue) * (100% - 50px));
-      transform: translateX(-50%);
-
-      &:before {
-        position: absolute;
-        content: '';
-        top: 100%;
-        left: 50%;
-        width: 1px;
-        height: 100vh;
-        background-color: rgba(black, .2);
-      }
-    }
-  }
-
-  .c-amazon span.bar:before {
-    background-color: brand_get("amazon");
-  }
-  .c-google span.bar:before {
-    background-color: brand_get("google");
-  }
-  .c-apple span.bar:before {
-    background-color: brand_get("apple");
-  }
-  .c-facebook span.bar:before {
-    background-color: brand_get("facebook");
-  }
-  .c-tesla span.bar:before {
-    background-color: brand_get("tesla");
   }
 }
